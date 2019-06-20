@@ -1,0 +1,8 @@
+html5lib
+neologdn
+requests
+beautifulsoup4
+mecab-python3
+gensim==3.7.3
+numpy
+ngt
