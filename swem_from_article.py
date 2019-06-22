@@ -16,10 +16,10 @@ mecab_system_dic = "/opt/mecab/dic/mecab-ipadic-neologd"
 class MeCabTokenizerWithStopWord(MeCabTokenizer):
     """
     swem.MeCabTokenizerから、ストップワードを扱えるようオーバーライドしたもの
+    nounsに含まれる形態素は除外する
     """
     def __init__(self, mecab_args="", nouns=set()):
         super().__init__(mecab_args)
-        # self.tagger = MeCab.Tagger(mecab_args)
         self.nouns = nouns
         self.tagger.parse("")
 
