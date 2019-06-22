@@ -58,8 +58,7 @@ def build_nouns_set(name_list_file):
     """
     名前・愛称・ユニット名から、除外する固有名詞のセット(集合)を用意する
     """
-    # f = open(name_list_file)
-    with open("names.csv") as f:
+    with open(name_list_file) as f:
         reader = csv.reader(f)
         header = next(reader)
         nouns = []
@@ -94,7 +93,8 @@ def main(name_list_file, w2v_model, pkl_filename):
 
     # KeyedVectorsの場合(save_word2vec_formatで保存したもの)
     from gensim.models import KeyedVectors
-    w2v = KeyedVectors.load_word2vec_format(w2v_model, binary=True)
+    w2v = KeyedVectors.load_word2vec_format(w2v_model, binary=True)  # .bin形式の場合
+    # w2v = KeyedVectors.load_word2vec_format(w2v_model, binary=False)  # .txt形式の場合
 
     # Word2Vec.saveで保存したもの
     # import gensim.models.doc2vec as doc2vec
@@ -147,5 +147,3 @@ def main(name_list_file, w2v_model, pkl_filename):
 if __name__ == '__main__':
     main(sys.argv[1], sys.argv[2], sys.argv[3])
     # main("names.csv", "corpus/ss-w2v.bin", "swem1.pkl")
-    # main("names.csv", "pixiv/doc2vec.model", "swem2.pkl")
-    # main("names.csv", "pixiv/fasttext-model.bin", "swem3.pkl")
