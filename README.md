@@ -10,15 +10,17 @@
 - Python (3.7以降)
 - MeCab 
 - mecab-ipadic-NEologd(強く推奨)
+- curl
 
+MeCab、mecab-ipadic-NEologdのインストール手順については[mecab-ipadic-NEologdのREADME](https://github.com/neologd/mecab-ipadic-neologd)を参考にしてください。
 
 ## Usage
 ### 環境構築
 ~~~
 # pyenv, virtualenv等による独立したPython環境構築を強く推奨
-pip -r requirements.txt
-git clone
-cd 
+git clone https://github.com/shuukei-imas-cg/idol2vec.git
+cd idol2vec
+pip install -r requirements.txt
 ~~~
 
 
