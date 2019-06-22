@@ -63,7 +63,7 @@ import pickle
 with open("swem1.pkl", "rb") as f:
     idolvecs = pickle.load(f)
 
-dim = 100
+dim = len(idolvecs[1][0])
 ngtpy.create(b"tmp", dim)
 index = ngtpy.Index(b"tmp")
 index.batch_insert(idolvecs[1])
