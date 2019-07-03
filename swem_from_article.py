@@ -54,7 +54,7 @@ def normalize(text: str) -> str:
     return text
 
 
-def build_nouns_set(name_list_file):
+def build_nouns_set(name_list_file: str, postfix: str) -> set:
     """
     名前・愛称・ユニット名から、除外する固有名詞のセット(集合)を用意する
     """
@@ -64,8 +64,8 @@ def build_nouns_set(name_list_file):
         nouns = []
         for row in reader:
             name = row[0]
-            if "(シンデレラガールズ)" in name:
-                name = name.replace("(シンデレラガールズ)", "")
+            if postfix in name:
+                name = name.replace(postfix, "")
             nouns.append(name)
             nickname = row[1]
             nouns.append(nickname)
@@ -83,11 +83,11 @@ def build_nouns_set(name_list_file):
     return nouns_set
 
 
-def main(name_list_file, w2v_model, pkl_filename):
+def main(name_list_file, postfix, w2v_model, pkl_filename):
     f = open(name_list_file)
     reader = csv.reader(f)
     header = next(reader)
-    nouns_set = build_nouns_set(name_list_file)
+    nouns_set = build_nouns_set(name_list_file, postfix)
 
     # Word2Vecモデルのロード時、モデルファイルの形式にあわせてロード手順を変えること
 
@@ -124,8 +124,8 @@ def main(name_list_file, w2v_model, pkl_filename):
             vec = swem.average_pooling(text)
             # vec = swem.max_pooling(text)
 
-            if "(シンデレラガールズ)" in name:
-                name = name.replace("(シンデレラガールズ)", "")
+            if postfix in name:
+                name = name.replace(postfix, "")
             names.append(name)
             vecs.append(vec)
             attributes[attribute].append(vec)
@@ -145,5 +145,5 @@ def main(name_list_file, w2v_model, pkl_filename):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
-    # main("names.csv", "corpus/ss-w2v.bin", "swem1.pkl")
+    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    # main("names.csv", "(シンデレラガールズ)", "corpus/ss-w2v.bin", "swem1.pkl")

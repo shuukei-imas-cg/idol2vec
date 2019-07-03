@@ -37,8 +37,11 @@ curl -o units.json "https://sparql.crssnky.xyz/spql/imas/query?force-accept=text
 (swem_from_article.py中のmecab_system_dicの値を、mecab-ipadic-NEologdのインストールパスにあわせて修正すること)
 
 # 各記事の分散表現を作りpklファイルとして保存する
-# python swem_from_article.py (アイドル名一覧のCSV) (Word2Vecモデルファイル) (保存先pklファイル名)
-python swem_from_article.py names.csv corpus/ss-w2v.bin swem1.pkl
+# Pixiv百科事典では「クラリス(シンデレラガールズ)」など名前が短いアイドルの表記にコンテンツ名を
+# 付ける場合があり、これをpostfixで指定する
+# python swem_from_article.py (アイドル名一覧のCSV) (記事名のpostfix) (Word2Vecモデルファイル) (保存先pklファイル名)
+python swem_from_article.py names.csv "(シンデレラガールズ)" corpus/ss-w2v.bin swem1.pkl
+
 
 # python swem_predict (上で保存したpklファイル名) (アイドル指定:names.csvのインデックスで指定)
 python swem_similar.py swem1.pkl 0
